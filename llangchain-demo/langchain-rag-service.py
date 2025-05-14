@@ -16,7 +16,7 @@ from langchain_community.document_loaders import PyMuPDFLoader
 _ = load_dotenv(find_dotenv())
 
 # llm
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+llm = ChatOpenAI(model="qwen3:1.7b", temperature=0)
 
 # 加载文档,可换成PDF、txt、doc等其他格式文档
 loader = TextLoader('../docs/解答手册.md', encoding='utf-8')
@@ -38,9 +38,8 @@ texts = text_splitter.create_documents(
     [page.page_content for page in pages]
 )
 
-
 # 选择向量模型，并灌库
-db = FAISS.from_documents(texts, OpenAIEmbeddings(model="text-embedding-ada-002"))
+db = FAISS.from_documents(texts, OpenAIEmbeddings(model="nomic-embed-text",base_url="http://47.98.197.208:11434"))
 # 获取检索器，选择 top-2 相关的检索结果
 retriever = db.as_retriever(search_kwargs={"k": 1})
 

@@ -8,3 +8,7 @@ python-dotenv==1.0.1
 Requests==2.32.3
 starlette==0.38.2
 uvicorn==0.30.6
+pymilvus==2.5.8
+ollama==0.4.8
+python-multipart==0.0.20
+pdfplumber==0.11.6
